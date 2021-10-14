@@ -1,6 +1,8 @@
 // importing package
 import mongoose from "mongoose";
+
 import MONGODB_URL from "./config/mongoURL";
+import logger from "./logger";
 
 // connecting to db
 mongoose
@@ -8,5 +10,5 @@ mongoose
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
-    .then(console.log("database is connected..."))
-    .catch((err) => console.log(err));
+    .then(logger.info("database is connected"))
+    .catch((err) => logger.error(err));

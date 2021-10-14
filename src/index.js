@@ -5,6 +5,8 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import helmet from "helmet";
 
+import logger from "./logger";
+
 // response function
 import response from "./utils/response";
 
@@ -44,7 +46,7 @@ app.use("/*", (req, res, next) => {
 
 // global error handler
 app.use((err, req, res, next) => {
-    console.log("global error handler ==>>", err);
+    logger.error(err);
 
     if (err.message === "Path not found")
         return response(res, null, "Path not found", true, 404);
@@ -52,4 +54,4 @@ app.use((err, req, res, next) => {
     response(res, null, "Internal error. Sorry!!!", true, 500);
 });
 
-app.listen(port, console.log(`Server running on ${port}`));
+app.listen(port, logger.info(`Server running on ${port}`));
