@@ -29,9 +29,9 @@ const port = process.env.PORT || 5000;
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(
-    cors({
-        origin: "http://localhost:3000",
-    })
+  cors({
+    origin: "http://localhost:3000",
+  })
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,18 +40,18 @@ app.use(express.urlencoded({ extended: false }));
 
 // 404 error handling
 app.use("/*", (req, res, next) => {
-    const err = new Error("Path not found");
-    next(err);
+  const err = new Error("Path not found");
+  next(err);
 });
 
 // global error handler
 app.use((err, req, res, next) => {
-    logger.error(err);
+  logger.error(err);
 
-    if (err.message === "Path not found")
-        return response(res, null, "Path not found", true, 404);
+  if (err.message === "Path not found")
+    return response(res, null, "Path not found", true, 404);
 
-    response(res, null, "Internal error. Sorry!!!", true, 500);
+  response(res, null, "Internal error. Sorry!!!", true, 500);
 });
 
 app.listen(port, logger.info(`Server running on ${port}`));

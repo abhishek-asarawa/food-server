@@ -6,9 +6,9 @@ import logger from "./logger";
 
 // connecting to db
 mongoose
-    .connect(MONGODB_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(logger.info("database is connected"))
-    .catch((err) => logger.error(err));
+  .connect(MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(logger.info("database is connected"))
+  .catch((err) => logger.error(err));
