@@ -11,6 +11,7 @@ import logger from "./logger";
 import response from "./utils/response";
 
 // routes
+import { userRoutes } from "./routes";
 
 // connecting to database
 import "./database";
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // routes
+app.use("/user", userRoutes);
 
 // 404 error handling
 app.use("/*", (req, res, next) => {
