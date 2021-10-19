@@ -13,4 +13,6 @@ routes.post(
   userController.addUser
 );
 
+routes.post("/login", userController.loginUser);
+
 export default routes;

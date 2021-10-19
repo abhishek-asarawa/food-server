@@ -4,6 +4,9 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import helmet from "helmet";
+import passport from "passport";
+
+dotenv.config();
 
 import logger from "./logger";
 
@@ -17,8 +20,8 @@ import { userRoutes } from "./routes";
 import "./database";
 
 // passport strategies
-
-dotenv.config();
+import "./local.passport";
+import "./jwt.passport";
 
 // init app
 const app = express();
@@ -36,6 +39,7 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 // routes
 app.use("/user", userRoutes);
