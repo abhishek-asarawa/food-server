@@ -14,7 +14,7 @@ import logger from "./logger";
 import response from "./utils/response";
 
 // routes
-import { authRoutes } from "./routes";
+import { authRoutes, userRoutes } from "./routes";
 
 // connecting to database
 import "./database";
@@ -43,6 +43,7 @@ app.use(passport.initialize());
 
 // routes
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 
 // 404 error handling
 app.use("/*", (req, res, next) => {

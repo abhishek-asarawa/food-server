@@ -1,9 +1,11 @@
 import passport from "passport";
+import { isEmpty } from "lodash";
 
 import { userMethods } from "../methods";
 import funcWrapper from "../utils/funcWrapper";
 import response from "../utils/response";
 import { getToken } from "../utils/jwt.helper";
+import { findUserById } from "../methods/user";
 
 export const addUser = funcWrapper(async (req, res, next) => {
   const { email, firstName, lastName, dob, password } = req.body;
@@ -59,3 +61,16 @@ export const loginUser = (req, res, next) => {
     next(err);
   }
 };
+
+// get user details
+export const getUser = funcWrapper(async (req, res, next) => {
+  const id = req.userId;
+
+  if (!id) return response(res, null, "Null user id found", true, 400);
+
+  const user = await findUserById(id);
+
+  if (isEmpty(user)) return response(res, null, "No user found", true, 404);
+
+  response(res, user, "User data");
+});
