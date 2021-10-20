@@ -64,11 +64,7 @@ export const loginUser = (req, res, next) => {
 
 // get user details
 export const getUser = funcWrapper(async (req, res, next) => {
-  const id = req.userId;
-
-  if (!id) return response(res, null, "Null user id found", true, 400);
-
-  const user = await findUserById(id);
+  const user = req.user;
 
   if (isEmpty(user)) return response(res, null, "No user found", true, 404);
 

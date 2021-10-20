@@ -43,7 +43,7 @@ app.use(passport.initialize());
 
 // routes
 app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
+app.use("/user", passport.authenticate("jwt", { session: false }), userRoutes);
 
 // 404 error handling
 app.use("/*", (req, res, next) => {
