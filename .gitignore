@@ -4,6 +4,9 @@
 
 build
 
+# secret
+*.key
+
 ### Node ###
 # Logs
 logs

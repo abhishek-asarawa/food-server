@@ -1,10 +1,9 @@
 import passport from "passport";
-import jwt from "jsonwebtoken";
 
-import { secret } from "../config/secretKey";
 import { userMethods } from "../methods";
 import funcWrapper from "../utils/funcWrapper";
 import response from "../utils/response";
+import { getToken } from "../utils/jwt.helper";
 
 export const addUser = funcWrapper(async (req, res, next) => {
   const { email, firstName, lastName, dob, password } = req.body;
@@ -43,9 +42,16 @@ export const loginUser = (req, res, next) => {
 
           // generate a signed json web token with the contents of user object and return it in the response
           const { _id } = user;
-          const token = jwt.sign({ id: _id }, secret);
+          const accessToken = getToken({ id: _id });
+          const refreshToken = getToken({ id: _id }, true);
 
-          return response(res, { user, token }, "Login Successful", false, 200);
+          return response(
+            res,
+            { user, accessToken, refreshToken },
+            "Login Successful",
+            false,
+            200
+          );
         });
       }
     )(req, res, next);
