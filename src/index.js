@@ -14,7 +14,7 @@ import logger from "./logger";
 import response from "./utils/response";
 
 // routes
-import { userRoutes } from "./routes";
+import { authRoutes } from "./routes";
 
 // connecting to database
 import "./database";
@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
 // routes
-app.use("/user", userRoutes);
+app.use("/auth", authRoutes);
 
 // 404 error handling
 app.use("/*", (req, res, next) => {

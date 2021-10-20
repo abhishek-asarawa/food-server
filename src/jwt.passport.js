@@ -1,11 +1,13 @@
 import passportJWT from "passport-jwt";
 import passport from "passport";
-
-// secret key
-import { secret } from "./config/secretKey";
+import path from "path";
+import { readFileSync } from "fs";
 
 // user model
 import { findUserById } from "./methods/user";
+
+// secret key
+const publicKeyPath = path.join(__dirname, "../accessPublic.key");
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -27,7 +29,7 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: secret,
+      secretOrKey: readFileSync(publicKeyPath),
     },
     logic
   )

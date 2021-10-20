@@ -7,12 +7,12 @@ const routes = Router();
 
 // add user
 routes.post(
-  "/sign-in",
+  "/signup",
   userValidation.signIn,
   checkValidationError,
   userController.addUser
 );
 
-routes.post("/login", userController.loginUser);
+routes.post("/sign-in", userController.loginUser);
 
 export default routes;
